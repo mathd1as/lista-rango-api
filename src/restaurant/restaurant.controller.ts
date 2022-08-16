@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { RestaurantService } from './restaurant.service';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
-import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
+// import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 
 @Controller('restaurant')
 export class RestaurantController {
@@ -27,16 +27,19 @@ export class RestaurantController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.restaurantService.findOne(+id);
+    return this.restaurantService.findOne(id);
   }
 
   // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateRestaurantDto: UpdateRestaurantDto) {
+  // update(
+  //   @Param('id') id: string,
+  //   @Body() updateRestaurantDto: UpdateRestaurantDto,
+  // ) {
   //   return this.restaurantService.update(+id, updateRestaurantDto);
   // }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.restaurantService.remove(+id);
+    return this.restaurantService.remove(id);
   }
 }
