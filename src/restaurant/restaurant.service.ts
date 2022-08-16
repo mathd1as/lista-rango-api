@@ -11,6 +11,7 @@ export class RestaurantService {
     @InjectModel(Restaurant.name)
     private restaurantModel: Model<RestaurantDocument>,
   ) {}
+
   create(createRestaurantDto: CreateRestaurantDto) {
     const restaurant = new this.restaurantModel(createRestaurantDto);
     return restaurant.save();
@@ -24,8 +25,12 @@ export class RestaurantService {
     return this.restaurantModel.findById(id);
   }
 
-  update(id: number, updateRestaurantDto: UpdateRestaurantDto) {
-    return `This action updates a #${id} restaurant`;
+  update(id: string, updateRestaurantDto: UpdateRestaurantDto) {
+    return this.restaurantModel.findByIdAndUpdate(
+      { _id: id },
+      { updateRestaurantDto },
+      { new: true },
+    );
   }
 
   remove(id: string) {
