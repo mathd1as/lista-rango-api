@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { RestaurantModule } from './restaurant/restaurant.module';
+import { ProductsModule } from './products/products.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { RestaurantModule } from './restaurant/restaurant.module';
     ),
     UsersModule,
     RestaurantModule,
+    ProductsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
