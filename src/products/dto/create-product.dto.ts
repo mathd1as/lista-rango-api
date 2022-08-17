@@ -5,4 +5,7 @@ export class CreateProductDto {
   category: string;
   promotion: boolean;
   description?: string;
+  promotionalValue?: number;
+  promotionalTime?: string;
+  restaurant: string;
 }
