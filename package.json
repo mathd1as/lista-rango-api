@@ -18,7 +18,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "setup:database":"docker run -d -p 27017:27017 --name lista-rango-mongodb -v mongo-data:/data/db -e MONGODB_INITDB_ROOT_USERNAME=mathd1as -e MONGODB_INITDB_ROOT_PASSWORD=mathd1as mongo:latest"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
