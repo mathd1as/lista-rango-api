@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { elementAt } from 'rxjs';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 import { Restaurant, RestaurantDocument } from './entities/restaurant.entity';
@@ -17,8 +18,18 @@ export class RestaurantService {
     return restaurant.save();
   }
 
-  findAll() {
-    return this.restaurantModel.find();
+  async findAll() {
+    const restaurantsCollection = await this.restaurantModel.find().exec();
+    const restaurants = [];
+
+    for (const element of restaurantsCollection) {
+      restaurants.push({
+        id: element._id,
+        name: element.name,
+      });
+    }
+
+    return restaurants;
   }
 
   findOne(id: string) {
