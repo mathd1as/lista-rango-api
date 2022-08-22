@@ -13,11 +13,14 @@ export class RestaurantService {
     private restaurantModel: Model<RestaurantDocument>,
   ) {}
 
-  create(createRestaurantDto: CreateRestaurantDto) {
-    const restaurant = this.restaurantModel.find({
-      restaurant_unique_mame: createRestaurantDto.restaurant_unique_mame,
-    });
-    if (restaurant) throw new Error('Restaurant already exists'); //Criar erro personalizado
+  async create(createRestaurantDto: CreateRestaurantDto) {
+    const restaurant = await this.restaurantModel
+      .find({
+        restaurant_unique_mame: createRestaurantDto.restaurant_unique_mame,
+      })
+      .exec();
+
+    if (restaurant.length > 0) throw new Error('Restaurant already exists'); //Criar erro personalizado
     const newRestaurant = new this.restaurantModel(createRestaurantDto);
     return newRestaurant.save();
   }
