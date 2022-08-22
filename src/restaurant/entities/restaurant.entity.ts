@@ -16,6 +16,9 @@ export class Restaurant {
 
   @Prop()
   opening_hours: string;
+
+  @Prop()
+  restaurant_unique_mame: string;
 }
 
 export const RestaurantSchema = SchemaFactory.createForClass(Restaurant);

@@ -14,8 +14,12 @@ export class RestaurantService {
   ) {}
 
   create(createRestaurantDto: CreateRestaurantDto) {
-    const restaurant = new this.restaurantModel(createRestaurantDto);
-    return restaurant.save();
+    const restaurant = this.restaurantModel.find({
+      restaurant_unique_mame: createRestaurantDto.restaurant_unique_mame,
+    });
+    if (restaurant) throw new Error('Restaurant already exists'); //Criar erro personalizado
+    const newRestaurant = new this.restaurantModel(createRestaurantDto);
+    return newRestaurant.save();
   }
 
   async findAll() {

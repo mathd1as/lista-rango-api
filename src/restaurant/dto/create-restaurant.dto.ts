@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsEmail } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 export class CreateRestaurantDto {
   @IsNotEmpty()
   png_link: string;
@@ -11,4 +11,7 @@ export class CreateRestaurantDto {
 
   @IsNotEmpty()
   opening_hours: string;
+
+  @IsNotEmpty()
+  restaurant_unique_mame: string;
 }
