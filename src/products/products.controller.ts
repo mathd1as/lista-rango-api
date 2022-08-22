@@ -20,14 +20,9 @@ export class ProductsController {
     return this.productsService.create(createProductDto);
   }
 
-  @Get()
-  findAll() {
-    return this.productsService.findAll();
-  }
-
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.productsService.findOne(id);
+  findAllRestaurantProducts(@Param('id') id: string) {
+    return this.productsService.findAllRestaurantProducts(id);
   }
 
   @Patch(':id')

@@ -17,12 +17,9 @@ export class ProductsService {
     return product.save();
   }
 
-  findAll() {
-    return this.productModel.find();
-  }
-
-  findOne(id: string) {
-    return this.productModel.findById(id);
+  async findAllRestaurantProducts(id: string) {
+    const products = await this.productModel.find({ restaurant: id });
+    return products;
   }
 
   update(id: string, updateProductDto: UpdateProductDto) {
