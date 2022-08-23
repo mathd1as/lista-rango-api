@@ -42,12 +42,26 @@ export class RestaurantService {
     return this.restaurantModel.findById(id);
   }
 
-  update(id: string, updateRestaurantDto: UpdateRestaurantDto) {
-    return this.restaurantModel.findByIdAndUpdate(
-      { _id: id },
-      { updateRestaurantDto },
-      { new: true },
-    );
+  async update(id: string, updateRestaurantDto: UpdateRestaurantDto) {
+    const restaurantDoc = await this.restaurantModel.findById(id).exec();
+
+    restaurantDoc.address = updateRestaurantDto.address
+      ? updateRestaurantDto.address
+      : restaurantDoc.address;
+
+    restaurantDoc.name = updateRestaurantDto.name
+      ? updateRestaurantDto.name
+      : restaurantDoc.name;
+
+    restaurantDoc.png_link = updateRestaurantDto.png_link
+      ? updateRestaurantDto.png_link
+      : restaurantDoc.png_link;
+
+    restaurantDoc.opening_hours = updateRestaurantDto.opening_hours
+      ? updateRestaurantDto.opening_hours
+      : restaurantDoc.opening_hours;
+
+    return await restaurantDoc.save();
   }
 
   remove(id: string) {
